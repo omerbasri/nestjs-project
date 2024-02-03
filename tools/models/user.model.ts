@@ -7,5 +7,6 @@ export class UserModel {
   email: string;
   password: string;
   passwordHash: string;
+  birthday: Date;
   audit: AuditModel;
 }
