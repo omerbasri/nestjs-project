@@ -22,13 +22,22 @@ export class UserService {
   createUser(body: UserCreateDto) {
     const isExist = result.find((res) => {
       res.email === body.email;
-      if (isExist) {
-        return isExist;
-      } else {
-        this.creatingMockUser(body);
-        return result.slice(result.length - 1, result.length);
-      }
     });
+    if (isExist) {
+      return isExist;
+    } else {
+      this.creatingMockUser(body);
+      return result.slice(result.length - 1, result.length);
+    }
+  }
+
+  getUserById(id): any {
+    const user = result.find((data) => data.id == id);
+    if (!user) {
+      return 'user does not exist';
+    } else {
+      return user;
+    }
   }
 
   private creatingMockUser(data: any) {
@@ -38,5 +47,7 @@ export class UserService {
     user.password = data.password;
     user.email = data.email;
     user.birthday = data.birthday;
+    user.id = (Math.floor(Math.random() * 60) + 1).toString();
+    result.push(user);
   }
 }
